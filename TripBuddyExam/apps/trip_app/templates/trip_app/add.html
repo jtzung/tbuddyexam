@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title>Add Trip</title>
+</head>
+    <style>
+    .controls{
+        display: inline-block;
+        margin-left: 400px;
+    }
+    .info{
+        display: inline-block;
+    }
+    </style>
+
+<body>
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+    <h2>Add a Trip</h2>
+    <div class="info">
+	<form action="/createTrip" method="POST">
+		{% csrf_token %}
+		<p>Destination: <input type="text" name="description"></p>
+        <p>Description: <input type="text" name="plan"></p>
+        <br>
+		<p>Travel Date From: <input type="date" name="start_date"></p>
+		<p>Travel Date To: <input type="date" name="end_date"></p>
+		<input type="submit" name="" value="Submit">
+    </form>
+    </div>
+
+    <div class="controls">
+    <p><a href="/travels">Back</a> | <a href="/logout">Logout</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<style type="text/css">
+		.register{
+			width: 500px;
+			display: inline-block;
+		}
+		.login{
+			width: 500px;
+			display: inline-block;
+			vertical-align: top;
+		}
+	</style>
+	<title>Trip Buddy</title>
+</head>
+<body>
+	<h3>Welcome to Trip Buddy!</h3>
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+    {% endif %}
+    
+	<div class="register">
+		<form action="/createUser" method="POST">
+			{% csrf_token %}
+			<p>First Name: <input type="text" name="first_name" value=""></p>
+			<p>Last Name: <input type="text" name="last_name"></p>
+			<p>Email: <input type="text" name="email" value=""></p>
+			<p>Password: <input type="text" name="pw" value=""></p>
+			<p>Confirm Password: <input type="text" name="cw" value=""></p>
+			<input type='submit' value='Register'>
+		  	</button>
+        </form>
+	</div>
+
+	<div class="login">
+		<form action="/login" method="POST">
+			{% csrf_token %}
+			<p>Email: <input type="text" name="email" value=""></p>
+			<p>Password: <input type="text" name="pw" value=""></p>
+			<input type='submit' value='Login'>
+		</form>
+    </div>
+
+</body>
+</html>

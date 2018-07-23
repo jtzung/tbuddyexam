@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+	<title>Travels</title>
+</head>
+<body>
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	<div>
+		<div class="welcome"><h4>Welcome, {{user.first_name}}!</h4></div>
+		<div class="logout">
+			<a href="/addtrip">Add A New Trip</a> |
+			<a href="/logout">Logout</a>
+		</div>
+    </div>
+    
+    <h5>Your Trip Schedules</h5>
+    <table>
+		<thead>
+			<th>Destination:</th>
+			<th>Travel Start Date:</th>
+			<th>Travel End Date:</th>
+			<th>Description:</th>
+			<th>Action:</th>
+		</thead>
+		<tbody>
+			{% for x in my_plans %}
+			<tr>
+				<td><a href="/view/{{x.id}}">{{x.description}}</a></td>
+				<td>{{x.start_date.date}}</td>
+				<td>{{x.end_date.date}}</td>
+				<td>{{x.plan}}</td>
+				<td><a href="/cancel/{{x.id}}">Cancel</a> 
+			</tr>
+			{% endfor %}
+		</tbody>
+        </table>
+	<h5>Other User's Travel Plans</h5>
+	<table>
+		<thead>
+			<th>Name:</th>
+			<th>Travel Start Date:</th>
+			<th>Travel End Date:</th>
+			<th>Do You Want To Join?</th>
+		</thead>
+		<tbody>
+			{% for x in all_plans %}
+			<tr>
+				<td><a href="/view/{{x.id}}">{{x.description}}</a></td>
+				<td>{{x.start_date.date}}</td>
+				<td>{{x.end_date.date}}</td>
+				<td><a href="/join/{{x.id}}">Join</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+    </table>
+
+</body>
+</html>
